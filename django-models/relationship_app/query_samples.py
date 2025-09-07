@@ -15,4 +15,3 @@ def get_librarian_for_library(library_name):
     librarian = Librarian.objects.librarian
     return librarian
 
-

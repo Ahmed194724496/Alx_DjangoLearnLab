@@ -5,9 +5,20 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth.decorators import login_required
 from .views import register_librarian, get_librarian_for_library
+from .views import register
 from .import views
 
-urlpatterns = [
+
+from django.urls import path
+from . import views
+
+
+
+from django.urls import path
+from . import views
+
+
+urlpatterns = [ 
     path('login/', LoginView.as_view(template_name='')),
     path('logout/', LogoutView.as_view(template_name='')),
     path('Admin-dashboard/', views.Admin_only_view, name='Admin_dashboard'),
@@ -25,13 +36,7 @@ urlpatterns = [
     path('member/', views.member_view, name='member_view'),
     path('add_book/', views.add_book, name='add_book'),
     path('edit_book/', views.add_book, name='edit_book'),
-    
-    path('edit/<int:pk>/'),
-    
+    #path('edit/<int:pk>/'),
     path('delete/<int:pk>/', views.delete_book, name='delete_book'),
 
 ]
-
-
-
-
