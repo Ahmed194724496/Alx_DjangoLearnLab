@@ -11,6 +11,7 @@ from django.db.models import CharField
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+<<<<<<< HEAD
 
 class CustomUser(AbstractUser):
     ROLE_CHOICES = (('Admin'))
@@ -20,8 +21,22 @@ class CustomUser(AbstractUser):
 
 
 #  Create your models here.
+=======
+>>>>>>> 75cd7f72e2f1b452d77ceaf9d02aeb70e0308ff4
 
+class CustomUser(AbstractUser):
+    ROLE_CHOICES = (
+        ('Admin'),
+        #('library_member', 'Library Member'),
+        #('librarian', 'Librarian'),
+    )
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES)
+
+#
+
+#  Create your models here.
 class Author(models.Model):
+<<<<<<< HEAD
     name = models.CharField(max_length=100) 
     
     def __str__(self):
@@ -42,20 +57,57 @@ class Book(models.Model):
 class Library(models.Model):
     name = models.CharField(max_length=100)
     books = models.ManyToManyField(Book)
+=======
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+    
+class Book(models.Model):
+    title = models.CharField(max_length=200)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='books')
+
+    def __str__(self):
+        return self.title
+
+class Meta:
+    permissions = (
+        ("can_add_book", "Can add book"),
+        ("can_change_book", "Can change book"),
+        ("can_delete_book", "Can delete book"),
+    )
+
+class Library(models.Model):
+    name = models.CharField(max_length=100)
+    books = models.ManyToManyField(Book, related_name='libraries')
+
+>>>>>>> 75cd7f72e2f1b452d77ceaf9d02aeb70e0308ff4
     def __str__(self):
         return self.name
     
 class Librarian(models.Model):
     name = models.CharField(max_length=100)
     library = models.OneToOneField(Library, on_delete=models.CASCADE)
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 75cd7f72e2f1b452d77ceaf9d02aeb70e0308ff4
     def __str__(self):
         return self.name
     
 class UserProfile(models.Model):
+<<<<<<< HEAD
     role = models.CharField(max_length=100 , choices=[('Librarian', 'Librarian'), ('Admin', 'Admin'), ('Member', 'Member')])
+=======
+    role = models.CharField(max_length=100 , choices=[('Admin')])
+>>>>>>> 75cd7f72e2f1b452d77ceaf9d02aeb70e0308ff4
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
             UserProfile.objects.create(user=instance)
+<<<<<<< HEAD
+=======
+
+>>>>>>> 75cd7f72e2f1b452d77ceaf9d02aeb70e0308ff4

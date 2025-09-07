@@ -11,4 +11,8 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     if hasattr(instance, 'userprofile'):
+<<<<<<< HEAD
         instance.userprofile.save()
+=======
+        instance.userprofile.save()
+>>>>>>> 75cd7f72e2f1b452d77ceaf9d02aeb70e0308ff4
